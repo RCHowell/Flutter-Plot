@@ -4,11 +4,13 @@ version: 0.0.1
 author: R. C. Howell <rhowell2@nd.edu>
 homepage: https://github.com/RCHowell/flutter_plot
 documentation:
-
+environment:
+  sdk: '>=1.12.0 <2.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
+  meta: ^1.1.2
 
 dev_dependencies:
   test: ^0.12.0

@@ -80,5 +80,5 @@ Plot simplePlot = new Plot(
 
 ## How to Use
 1. Add as a dependency
-2. `import 'package:flutter_plot/plot.dart';`
+2. `import 'package:flutter_plot/flutter_plot.dart';`
 3. See examples! There's not much to this package yet!
