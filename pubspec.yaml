@@ -2,7 +2,7 @@ name: flutter_plot
 description: A pretty plotting package for Flutter apps.
 version: 0.0.1
 author: R. C. Howell
-homepage:
+homepage: https://github.com/RCHowell/flutter_plot
 
 dependencies:
   flutter:
