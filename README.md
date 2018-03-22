@@ -1,7 +1,7 @@
 # flutter_plot
 R. C. Howell - 2018
 
-A pretty plotting package for Flutter apps. Sizing and autopadding isn't great right now, but tinkering with padding and fontSize will allow for you to align things well.
+A pretty plotting package for Flutter apps. Sizing and autopadding isn't great right now, but tinkering with padding and fontSize will allow for you to align things well. You can also check out `/docs` to learn more, but it really is a single file package.
 
 ## Example 1
 
