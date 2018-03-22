@@ -1,0 +1,95 @@
+Flutter crash report; please file at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter upgrade
+
+## exception
+
+ArgumentError: Invalid argument(s): Cannot find executable for /Users/rch/Projects/flutter/bin/cache/artifacts/engine/darwin-x64/dart-sdk/bin/dart.
+
+```
+#0      _getExecutable (package:process/src/interface/local_process_manager.dart:113)
+#1      LocalProcessManager.runSync (package:process/src/interface/local_process_manager.dart:84)
+#2      Cache.engineDartVersion (package:flutter_tools/src/cache.dart:139)
+#3      FlutterVersion.engineDartVersion (package:flutter_tools/src/version.dart:86)
+#4      _FlutterValidator.validate (package:flutter_tools/src/doctor.dart:215)
+<asynchronous suspension>
+#5      Doctor.diagnose (package:flutter_tools/src/doctor.dart:106)
+<asynchronous suspension>
+#6      UpgradeCommand.runCommand (package:flutter_tools/src/commands/upgrade.dart:80)
+<asynchronous suspension>
+#7      FlutterCommand.verifyThenRunCommand (package:flutter_tools/src/runner/flutter_command.dart:279)
+<asynchronous suspension>
+#8      FlutterCommand.run (package:flutter_tools/src/runner/flutter_command.dart:219)
+<asynchronous suspension>
+#9      CommandRunner.runCommand (package:args/command_runner.dart:194)
+<asynchronous suspension>
+#10     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:284)
+<asynchronous suspension>
+#11     CommandRunner.run.<anonymous closure> (package:args/command_runner.dart:109)
+#12     new Future.sync (dart:async/future.dart:222)
+#13     CommandRunner.run (package:args/command_runner.dart:109)
+#14     FlutterCommandRunner.run (package:flutter_tools/src/runner/flutter_command_runner.dart:166)
+#15     run.<anonymous closure> (package:flutter_tools/runner.dart:89)
+<asynchronous suspension>
+#16     AppContext._run (package:flutter_tools/src/base/context.dart:76)
+<asynchronous suspension>
+#17     AppContext.runInZone.<anonymous closure> (package:flutter_tools/src/base/context.dart:66)
+#18     _rootRun (dart:async/zone.dart:1126)
+#19     _CustomZone.run (dart:async/zone.dart:1023)
+#20     runZoned (dart:async/zone.dart:1501)
+#21     AppContext.runInZone (package:flutter_tools/src/base/context.dart:65)
+#22     run (package:flutter_tools/runner.dart:60)
+<asynchronous suspension>
+#23     main (package:flutter_tools/executable.dart:44)
+<asynchronous suspension>
+#24     main (file:///Users/rch/Projects/flutter/packages/flutter_tools/bin/flutter_tools.dart:16)
+#25     _startIsolate.<anonymous closure> (dart:isolate-patch/dart:isolate/isolate_patch.dart:275)
+#26     _RawReceivePortImpl._handleMessage (dart:isolate-patch/dart:isolate/isolate_patch.dart:163)
+```
+
+## flutter doctor
+
+```
+encountered exception: Invalid argument(s): Cannot find executable for /Users/rch/Projects/flutter/bin/cache/artifacts/engine/darwin-x64/dart-sdk/bin/dart.
+
+#0      _getExecutable (package:process/src/interface/local_process_manager.dart:113)
+#1      LocalProcessManager.runSync (package:process/src/interface/local_process_manager.dart:84)
+#2      Cache.engineDartVersion (package:flutter_tools/src/cache.dart:139)
+#3      FlutterVersion.engineDartVersion (package:flutter_tools/src/version.dart:86)
+#4      _FlutterValidator.validate (package:flutter_tools/src/doctor.dart:215)
+<asynchronous suspension>
+#5      Doctor.diagnose (package:flutter_tools/src/doctor.dart:106)
+<asynchronous suspension>
+#6      _doctorText.<anonymous closure> (package:flutter_tools/runner.dart:236)
+#7      AppContext._run (package:flutter_tools/src/base/context.dart:76)
+<asynchronous suspension>
+#8      AppContext.runInZone.<anonymous closure> (package:flutter_tools/src/base/context.dart:66)
+#9      _rootRun (dart:async/zone.dart:1126)
+#10     _CustomZone.run (dart:async/zone.dart:1023)
+#11     runZoned (dart:async/zone.dart:1501)
+#12     AppContext.runInZone (package:flutter_tools/src/base/context.dart:65)
+#13     _doctorText (package:flutter_tools/runner.dart:236)
+<asynchronous suspension>
+#14     _createLocalCrashReport (package:flutter_tools/runner.dart:211)
+<asynchronous suspension>
+#15     _handleToolError (package:flutter_tools/runner.dart:166)
+<asynchronous suspension>
+#16     run.<anonymous closure> (package:flutter_tools/runner.dart:93)
+<asynchronous suspension>
+#17     AppContext._run (package:flutter_tools/src/base/context.dart:76)
+<asynchronous suspension>
+#18     AppContext.runInZone.<anonymous closure> (package:flutter_tools/src/base/context.dart:66)
+#19     _rootRun (dart:async/zone.dart:1126)
+#20     _CustomZone.run (dart:async/zone.dart:1023)
+#21     runZoned (dart:async/zone.dart:1501)
+#22     AppContext.runInZone (package:flutter_tools/src/base/context.dart:65)
+#23     run (package:flutter_tools/runner.dart:60)
+<asynchronous suspension>
+#24     main (package:flutter_tools/executable.dart:44)
+<asynchronous suspension>
+#25     main (file:///Users/rch/Projects/flutter/packages/flutter_tools/bin/flutter_tools.dart:16)
+#26     _startIsolate.<anonymous closure> (dart:isolate-patch/dart:isolate/isolate_patch.dart:275)
+#27     _RawReceivePortImpl._handleMessage (dart:isolate-patch/dart:isolate/isolate_patch.dart:163)
+```
