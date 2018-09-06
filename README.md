@@ -77,6 +77,63 @@ Plot simplePlot = new Plot(
   padding: const EdgeInsets.fromLTRB(40.0, 12.0, 12.0, 40.0),
 );
 ```
+## Displaying trace lines and coordinates
+
+![Screenshot 4](https://i.imgur.com/DfEMb1Im.jpg)
+![Screenshot 5](https://i.imgur.com/RkIYTycm.jpg)
+![Screenshot 6](https://i.imgur.com/5M9h5zpm.jpg)
+
+```
+final List<Point> data = [
+  const Point(9, 1),
+  const Point(-7.0, 19.0),
+  const Point(13.0, 5.0),
+  const Point(-10.0, -4.0),
+  const Point(16.0, 12.0),
+];
+
+new Card(
+  child: new Column(
+    children: <Widget>[
+      new Container(
+        padding: const EdgeInsets.only(top: 12.0),
+        child: new Text('Super Neat Plot'),
+      ),
+      new Container(
+        child: new Plot(
+          height: 200.0,
+          data: widget.data,
+          gridSize: new Offset(2.0, 2.0),
+          style: new PlotStyle(
+            axisStrokeWidth: 2.0,
+            pointRadius: 3.0,
+            outlineRadius: 1.0,
+            primary: Colors.yellow,
+            secondary: Colors.red,
+            trace: true,
+            traceStokeWidth: 3.0,
+            traceColor: Colors.blueGrey,
+            traceClose: true,
+            showCoordinates: true,
+            textStyle: new TextStyle(
+              fontSize: 8.0,
+              color: Colors.grey,
+            ),
+            axis: Colors.blueGrey[600],
+            gridline: Colors.blueGrey[100],
+          ),
+            axis: Colors.blueGrey[600],
+            gridline: Colors.blueGrey[100],
+          ),
+          padding: const EdgeInsets.fromLTRB(40.0, 12.0, 12.0, 40.0),
+          xTitle: 'My X Title',
+          yTitle: 'My Y Title',
+          ),
+      ),
+    ],
+  ),
+),
+```
 
 ## How to Use
 1. Add as a dependency
