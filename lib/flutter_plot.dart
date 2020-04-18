@@ -6,14 +6,13 @@ import 'dart:math';
 import 'package:meta/meta.dart';
 
 /// Plot is a [StatelessWidget]
-/// 
+///
 /// A [CustomPaint] is used to draw the Plot,
 /// and the CustomPaint is wrapped in a [Container]
 /// so that a user can provide height constraints and layout the
 /// plot like they would other widgets. The plot takes all the
 /// width that is available.
 class Plot extends StatelessWidget {
-  
   /// Widget height
   final double height;
 
@@ -23,14 +22,14 @@ class Plot extends StatelessWidget {
   final PlotStyle style;
 
   /// gridSize determines how the grid is drawn
-  /// 
+  ///
   /// dx = x-width and dy = y-width.
   final Offset gridSize;
 
   /// Padding so that labels and text is visible
-  /// 
+  ///
   /// This is a known issue that someone more clever could help resolve.
-  /// Ideally, padding should be calculated based upon the width/height of labels and 
+  /// Ideally, padding should be calculated based upon the width/height of labels and
   /// the xWindow/yWindow of the dataset, however, I'm unsure how to extract text width so
   /// that I may calculate padding.
   final EdgeInsets padding;
@@ -69,7 +68,6 @@ class Plot extends StatelessWidget {
       ),
     );
   }
-
 }
 
 class _PlotPainter extends CustomPainter {
@@ -175,7 +173,7 @@ class _PlotPainter extends CustomPainter {
       label.layout(maxWidth: size.width, minWidth: size.width);
       Offset labelPos = new Offset(-1.5 * size.height, -3.5 * label.height);
       canvas.save();
-      canvas.rotate(-PI / 2);
+      canvas.rotate(-pi / 2);
       label.paint(canvas, labelPos);
       canvas.restore();
     }
@@ -308,8 +306,6 @@ class _PlotPainter extends CustomPainter {
     label.paint(canvas, labelPos);
   }
 }
-
-
 
 /// PlotStyle is used to style a plot
 class PlotStyle {
