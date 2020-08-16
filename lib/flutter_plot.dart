@@ -40,8 +40,12 @@ class Plot extends StatelessWidget {
   /// Title to be displayed on the y-axis
   final String yTitle;
 
+  /// If the origin should be centered
+  final bool centered;
+
   Plot({
     this.height = 200.0,
+    this.centered = false,
     @required this.data,
     @required this.style,
     @required this.gridSize,
@@ -64,6 +68,7 @@ class Plot extends StatelessWidget {
           gridSize: this.gridSize,
           xTitle: this.xTitle,
           yTitle: this.yTitle,
+          centered: this.centered
         ),
       ),
     );
@@ -86,6 +91,7 @@ class _PlotPainter extends CustomPainter {
     this.gridSize,
     this.xTitle,
     this.yTitle,
+    bool centered
   }) : super() {
     assert(this.points != null && points.length > 0);
     this.points.sort((a, b) => a.x.compareTo(b.x));
@@ -98,6 +104,15 @@ class _PlotPainter extends CustomPainter {
     maxY = (this.points.last.y < 0.0) ? 0.0 : this.points.last.y + gridSize.dy;
     windowWidth = maxX.abs() + minX.abs();
     windowHeight = maxY.abs() + minY.abs();
+
+    if(centered){
+      final double longestDistance = max(min(minX, minY).abs(),max(maxX, maxY));
+      maxY = longestDistance;
+      maxX = longestDistance;
+      minY = longestDistance * -1;
+      minX = longestDistance * -1;
+    }
+
   }
 
   @override
