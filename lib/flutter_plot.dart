@@ -111,6 +111,8 @@ class _PlotPainter extends CustomPainter {
       maxX = longestDistance;
       minY = longestDistance * -1;
       minX = longestDistance * -1;
+      windowHeight = longestDistance * 2;
+      windowWidth = longestDistance * 2;
     }
 
   }
