@@ -132,7 +132,7 @@ class _PlotPainter extends CustomPainter {
 
     for (int i = 0; i < xGridlineCount; i += 1) {
       // Routine for drawing xGridlines and xLabels
-      drawLineAndLabel(double j) {
+      drawLineAndLabel(num j) {
         Offset start = _scalePoint(new Point(j, 0), size);
         _drawXLabel((j).toString(), canvas, start.dx, origin.dy, size);
         if (style.gridline != null) {
@@ -141,14 +141,16 @@ class _PlotPainter extends CustomPainter {
         }
       }
 
-      double x = i * gridSize.dx;
+      num x = i * gridSize.dx;
+      if(!style.trailingZeros && x % 1 == 0)
+        x = x.toInt();
       if (-x >= minX && -x < 0) drawLineAndLabel(-x);
       if (x <= maxX && x >= 0) drawLineAndLabel(x);
     }
 
     for (int i = 0; i < yGridlineCount; i += 1) {
       // Routine for drawing yGridlines and yLabels
-      drawLineAndLabel(double j) {
+      drawLineAndLabel(num j) {
         Offset start = _scalePoint(new Point(minX, j), size);
         _drawYLabel((j).toString(), canvas, origin.dx, start.dy, size);
         if (style.gridline != null) {
@@ -157,7 +159,10 @@ class _PlotPainter extends CustomPainter {
         }
       }
 
-      double y = i * gridSize.dy;
+      num y = i * gridSize.dy;
+      if(!style.trailingZeros && y % 1 == 0)
+        y = y.toInt();
+
       if (-y >= minY && -y < 0) drawLineAndLabel(-y);
       if (y <= maxY && y >= 0) drawLineAndLabel(y);
     }
@@ -389,6 +394,11 @@ class PlotStyle {
   /// Defaults to false
   bool showCoordinates;
 
+  /// If trailing zeros should be drawn
+  ///
+  /// Defaults to true
+  final bool trailingZeros;
+
   PlotStyle({
     this.pointRadius = 2.0,
     this.outlineRadius = 0.0,
@@ -402,6 +412,7 @@ class PlotStyle {
     this.traceColor,
     this.traceStokeWidth = 2.0,
     this.showCoordinates = false,
+    this.trailingZeros = true,
     @required this.textStyle,
   });
 }
