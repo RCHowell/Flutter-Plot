@@ -63,13 +63,12 @@ class Plot extends StatelessWidget {
       child: new CustomPaint(
         size: Size.infinite,
         painter: new _PlotPainter(
-          points: this.data,
-          style: this.style,
-          gridSize: this.gridSize,
-          xTitle: this.xTitle,
-          yTitle: this.yTitle,
-          centered: this.centered
-        ),
+            points: this.data,
+            style: this.style,
+            gridSize: this.gridSize,
+            xTitle: this.xTitle,
+            yTitle: this.yTitle,
+            centered: this.centered),
       ),
     );
   }
@@ -85,28 +84,33 @@ class _PlotPainter extends CustomPainter {
   // Used for determing the window
   double minX, maxX, minY, maxY, windowWidth, windowHeight;
 
-  _PlotPainter({
-    this.points,
-    this.style,
-    this.gridSize,
-    this.xTitle,
-    this.yTitle,
-    bool centered
-  }) : super() {
+  _PlotPainter(
+      {this.points,
+      this.style,
+      this.gridSize,
+      this.xTitle,
+      this.yTitle,
+      bool centered})
+      : super() {
     assert(this.points != null && points.length > 0);
-    this.points.sort((a, b) => a.x.compareTo(b.x));
-    minX =
-        (this.points.first.x > 0.0) ? 0.0 : this.points.first.x - gridSize.dx;
-    maxX = (this.points.last.x < 0.0) ? 0.0 : this.points.last.x + gridSize.dx;
-    this.points.sort((a, b) => a.y.compareTo(b.y));
-    minY =
-        (this.points.first.y > 0.0) ? 0.0 : this.points.first.y - gridSize.dy;
-    maxY = (this.points.last.y < 0.0) ? 0.0 : this.points.last.y + gridSize.dy;
+    double minDataX =
+        this.points.fold(0.0, (v, e) => v < e.x ? v : e.x.toDouble());
+    minX = (minDataX > 0.0) ? 0.0 : minDataX - gridSize.dx;
+    double maxDataX =
+        this.points.fold(0, (v, e) => v < e.x ? e.x.toDouble() : v);
+    maxX = (maxDataX < 0.0) ? 0.0 : maxDataX + gridSize.dx;
+    double minDataY =
+        this.points.fold(0.0, (v, e) => v < e.y ? v : e.y.toDouble());
+    minY = (minDataY > 0.0) ? 0.0 : minDataY - gridSize.dy;
+    double maxDataY =
+        this.points.fold(0.0, (v, e) => v < e.y ? e.y.toDouble() : v);
+    maxY = (maxDataY < 0.0) ? 0.0 : maxDataY + gridSize.dy;
     windowWidth = maxX.abs() + minX.abs();
     windowHeight = maxY.abs() + minY.abs();
 
-    if(centered){
-      final double longestDistance = max(min(minX, minY).abs(),max(maxX, maxY));
+    if (centered) {
+      final double longestDistance =
+          max(min(minX, minY).abs(), max(maxX, maxY));
       maxY = longestDistance;
       maxX = longestDistance;
       minY = longestDistance * -1;
@@ -114,7 +118,6 @@ class _PlotPainter extends CustomPainter {
       windowHeight = longestDistance * 2;
       windowWidth = longestDistance * 2;
     }
-
   }
 
   @override
@@ -142,8 +145,7 @@ class _PlotPainter extends CustomPainter {
       }
 
       num x = i * gridSize.dx;
-      if(!style.trailingZeros && x % 1 == 0)
-        x = x.toInt();
+      if (!style.trailingZeros && x % 1 == 0) x = x.toInt();
       if (-x >= minX && -x < 0) drawLineAndLabel(-x);
       if (x <= maxX && x >= 0) drawLineAndLabel(x);
     }
@@ -160,8 +162,7 @@ class _PlotPainter extends CustomPainter {
       }
 
       num y = i * gridSize.dy;
-      if(!style.trailingZeros && y % 1 == 0)
-        y = y.toInt();
+      if (!style.trailingZeros && y % 1 == 0) y = y.toInt();
 
       if (-y >= minY && -y < 0) drawLineAndLabel(-y);
       if (y <= maxY && y >= 0) drawLineAndLabel(y);
