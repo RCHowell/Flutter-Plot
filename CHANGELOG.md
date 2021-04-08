@@ -1,3 +1,6 @@
+## [0.1.0]
+Migrated to null-safety
+
 ## [0.0.3] - 4/18/2020
 Updated PI constant to pi
 

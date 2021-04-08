@@ -35,10 +35,10 @@ class Plot extends StatelessWidget {
   final EdgeInsets padding;
 
   /// Title to be displayed on the x-axis
-  final String xTitle;
+  final String? xTitle;
 
   /// Title to be displayed on the y-axis
-  final String yTitle;
+  final String? yTitle;
 
   /// If the origin should be centered
   final bool centered;
@@ -46,10 +46,10 @@ class Plot extends StatelessWidget {
   Plot({
     this.height = 200.0,
     this.centered = false,
-    @required this.data,
-    @required this.style,
-    @required this.gridSize,
-    @required this.padding,
+    required this.data,
+    required this.style,
+    required this.gridSize,
+    required this.padding,
     this.xTitle,
     this.yTitle,
   });
@@ -78,21 +78,21 @@ class _PlotPainter extends CustomPainter {
   final List<Point> points;
   final PlotStyle style;
   final Offset gridSize;
-  final String xTitle;
-  final String yTitle;
+  final String? xTitle;
+  final String? yTitle;
 
   // Used for determing the window
-  double minX, maxX, minY, maxY, windowWidth, windowHeight;
+  late double minX, maxX, minY, maxY, windowWidth, windowHeight;
 
   _PlotPainter(
-      {this.points,
-      this.style,
-      this.gridSize,
+      {required this.points,
+      required this.style,
+      required this.gridSize,
       this.xTitle,
       this.yTitle,
-      bool centered})
+      bool centered = false})
       : super() {
-    assert(this.points != null && points.length > 0);
+    assert(points.length > 0);
     double minDataX =
         this.points.fold(0.0, (v, e) => v < e.x ? v : e.x.toDouble());
     minX = (minDataX > 0.0) ? 0.0 : minDataX - gridSize.dx;
@@ -204,7 +204,7 @@ class _PlotPainter extends CustomPainter {
     // DRAWING EACH AXIS
     if (style.axis != null) {
       Paint axisPaint = new Paint();
-      axisPaint.color = style.axis;
+      axisPaint.color = style.axis!;
       axisPaint.style = PaintingStyle.stroke;
       axisPaint.strokeWidth = style.axisStrokeWidth;
       // Draw X Axis
@@ -218,8 +218,7 @@ class _PlotPainter extends CustomPainter {
     // DRAWING TRACE LINES
     if (style.trace) {
       Paint traceLinePaint = new Paint();
-      traceLinePaint.color =
-          style.traceColor != null ? style.traceColor : style.secondary;
+      traceLinePaint.color = style.traceColor ?? style.secondary;
       traceLinePaint.strokeWidth = style.traceStokeWidth;
       traceLinePaint.style = PaintingStyle.fill;
       for (int i = 0; i < this.points.length; i++) {
@@ -355,12 +354,12 @@ class PlotStyle {
   /// Color to draw the gridlines
   ///
   /// If not provided, then the gridlines are not drawn.
-  final Color gridline;
+  final Color? gridline;
 
   /// Color to draw the axis
   ///
   /// If not provided, the axis is not drawn.
-  final Color axis;
+  final Color? axis;
 
   /// Drawing width of the axis
   ///
@@ -368,7 +367,7 @@ class PlotStyle {
   final double axisStrokeWidth;
 
   /// [TextStyle] for the axis labels and titles
-  final TextStyle textStyle;
+  final TextStyle? textStyle;
 
   /// If true lines will be drawn between each consecutive point
   ///
@@ -383,7 +382,7 @@ class PlotStyle {
   /// Color to draw trace lines with
   ///
   /// Defaults to #FF0000FF (Blue)
-  final Color traceColor;
+  final Color? traceColor;
 
   /// Trace line stroke width
   ///
@@ -414,6 +413,6 @@ class PlotStyle {
     this.traceStokeWidth = 2.0,
     this.showCoordinates = false,
     this.trailingZeros = true,
-    @required this.textStyle,
+    required this.textStyle,
   });
 }
